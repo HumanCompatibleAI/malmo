@@ -31,6 +31,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -91,10 +92,24 @@ public class NearbyCraftCommandsImplementation extends CommandBase {
         @Override
         public IMessage onMessage(CraftNearbyMessage message, MessageContext ctx) {
             EntityPlayerMP player = ctx.getServerHandler().playerEntity;
-            Vec3d headPos = new Vec3d(player.posX, player.posY + 1.6, player.posZ);
+             /*Vec3d headPos = new Vec3d(player.posX, player.posY + 1.6, player.posZ); */
 
             // Location checking
             boolean closeTable = false;
+            RayTraceResult rtr = Minecraft.getMinecraft().objectMouseOver;
+            BlockPos pos = null;
+            if (rtr != null && rtr.typeOfHit == RayTraceResult.Type.BLOCK)
+            {
+                pos = rtr.getBlockPos();
+                if (Minecraft.getMinecraft().world.getBlockState(pos).getBlock() instanceof BlockWorkbench) {
+                    closeTable = true;
+                    System.out.println("Crafting!");
+                    System.out.println(message.parameters);
+                }
+
+            }
+
+            /*
             for (BlockPos furnace : craftingTables) {
                 Vec3d blockVec = new Vec3d(furnace.getX() + 0.5, furnace.getY() + 0.5, furnace.getZ() + 0.5);
 
@@ -127,7 +142,7 @@ public class NearbyCraftCommandsImplementation extends CommandBase {
                             closeTable = true;
                     }
                 }
-            }
+            }*/
 
             if (closeTable) {
                 // We are close enough, try crafting recipes
