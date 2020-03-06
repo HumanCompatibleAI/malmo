@@ -268,7 +268,7 @@ public class MalmoMod
         /** Construct a message for the (hopefully) single listener that matches the uid
          * @param messageType
          * @param uid a hash code that (more or less) uniquely identifies the targeted listener
-         * @param message
+         * @param data
          */
         public MalmoMessage(MalmoMessageType messageType, int uid, Map<String, String> data)
         {

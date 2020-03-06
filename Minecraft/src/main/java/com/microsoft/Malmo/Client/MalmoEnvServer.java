@@ -489,7 +489,7 @@ public class MalmoEnvServer implements IWantToQuit {
             }
             done = envState.done;
             // TimeHelper.SyncManager.debugLog("[MALMO_ENV_SERVER] <STEP> STATUS " + Boolean.toString(done));
-            envState.info = null;
+            envState.info = "";
             envState.obs = null;
             envState.reward = 0.0;
             
