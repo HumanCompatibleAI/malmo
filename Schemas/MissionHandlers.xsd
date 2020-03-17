@@ -2504,6 +2504,17 @@
         <xs:attribute name="colour" use="optional" type="ColourList"/>
     </xs:complexType>
 
+    <xs:complexType name="BlockSpecWithReward">
+        <xs:complexContent>
+            <xs:extension base="BlockSpec">
+                <xs:attribute name="reward" use="required" type="xs:decimal"/>
+                <xs:attribute name="distribution" type="xs:string" use="optional" default=""/>
+                <xs:attribute name="cooldownInTicks" type="xs:int" use="optional" default="0"/>
+                <xs:attribute name="singleBlock" type="xs:boolean" use="optional" default="true"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
     <xs:complexType name="BlockSpecWithRewardAndBehaviour">
         <xs:complexContent>
             <xs:extension base="BlockSpec">
@@ -2543,6 +2554,31 @@
             <xs:choice minOccurs="1" maxOccurs="unbounded">
                 <xs:element name="Block" type="BlockSpecWithRewardAndBehaviour"/>
             </xs:choice>
+            <xs:attributeGroup ref="RewardProducerAttributes"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="RewardForNearbyBlockType">
+        <xs:annotation>
+            <xs:documentation>
+                Sends a reward proportional to how close an agent is to a specific block type.
+                In particular, gives the max reward when the agent is touching the block and
+                    gives 0 when the agent is 10 blocks away or farther, linearly interpolating.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:choice minOccurs="1" maxOccurs="unbounded">
+                <xs:element name="Block" type="BlockSpecWithReward"/>
+            </xs:choice>
+            <xs:attribute name="max" use="optional" type="xs:boolean" default="false">
+                <xs:annotation>
+                    <xs:documentation>
+                        Set to true if the reward should be the max over all BlockSpecs specified,
+                            otherwise it will be the sum from all BlockSpecs.
+                        Individual BlockSpecs can aggregate over block types or choose the nearest block.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
             <xs:attributeGroup ref="RewardProducerAttributes"/>
         </xs:complexType>
     </xs:element>
