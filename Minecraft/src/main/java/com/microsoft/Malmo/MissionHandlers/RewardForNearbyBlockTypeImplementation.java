@@ -132,7 +132,6 @@ public class RewardForNearbyBlockTypeImplementation extends RewardBase implement
         Vec3d playerPos = player.getPositionVector();
         BlockPos playerBlock = player.getPosition();
 
-        long start = System.nanoTime();
         for (int x = -RADIUS; x <= RADIUS; x++) {
             for (int y = -RADIUS; y <= RADIUS; y++) {
                 for (int z = -RADIUS; z <= RADIUS; z++) {
@@ -166,9 +165,6 @@ public class RewardForNearbyBlockTypeImplementation extends RewardBase implement
                 }
             }
         }
-        long time = System.nanoTime() - start;
-        double seconds = (double)time / 1000000000.0;
-        System.out.println(String.format("Searching %d blocks took %.4f seconds", RADIUS*RADIUS*RADIUS, seconds));
         float final_reward = 0;
         for (int i = 0; i < matcherRewards.length; i++) {
             if (this.max && matcherRewards[i] > final_reward) {
