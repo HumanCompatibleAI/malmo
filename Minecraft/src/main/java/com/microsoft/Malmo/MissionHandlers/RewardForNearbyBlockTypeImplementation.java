@@ -13,6 +13,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /** Gives a reward when the Minecraft player is within a certain distance of blocks.
@@ -143,6 +144,7 @@ public class RewardForNearbyBlockTypeImplementation extends RewardBase implement
 
                         if (bm.applies(pos) && bm.matches(pos, blockState)) {
                             float reward_value = bm.reward();
+
                             float adjusted_reward = adjustAndDistributeReward(reward_value, this.params.getDimension(), bm.spec.getDistribution());
                             float dist = (float) playerPos.subtract(new Vec3d(pos.getX() + 0.5,
                                     pos.getY() + 0.5,
@@ -154,9 +156,13 @@ public class RewardForNearbyBlockTypeImplementation extends RewardBase implement
                             }
 
                             float scaled_reward = adjusted_reward * invDist;
-                            if (bm.singleBlock() && matcherRewards[i] < scaled_reward) {
-                                matcherRewards[i] = scaled_reward;
+                            if (bm.singleBlock()) {
+                                if (matcherRewards[i] < scaled_reward) {
+                                    System.out.println("CASE 1");
+                                    matcherRewards[i] = scaled_reward;
+                                }
                             } else {
+                                System.out.println("CASE 2");
                                 matcherRewards[i] += scaled_reward;
                             }
                             matcherFires[i] = true;
@@ -177,6 +183,7 @@ public class RewardForNearbyBlockTypeImplementation extends RewardBase implement
                 this.matchers.get(i).tick();
             }
         }
+        System.out.println("A searchable string: " + final_reward);
         reward.add(this.params.getDimension(), final_reward);
     }
 
