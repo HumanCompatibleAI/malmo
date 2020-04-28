@@ -66,14 +66,9 @@ public class CommandGroup extends CommandBase
         {
             if (han.execute(verb + " " + parameter, missionInit))
             {
-                System.out.println("*** Successfully executed command '" + verb + "' with parameters '" + parameter + "' ***");
-                System.out.println("   ==> The successful handler was of type " + han.getClass().getName());
-                System.out.println("   ==> The CommandGroup is " + this.getClass().getName());
                 return true;
             }
         }
-        System.out.println("*** Failed to execute command '" + verb + "' with parameters '" + parameter + "' ***");
-        System.out.println("   ==> The CommandGroup is " + this.getClass().getName());
         return false;
     }
 

@@ -88,7 +88,7 @@ public class AnimationDecoratorImplementation extends HandlerBase implements IWo
             catch (Exception e)
             {
                 // Malformed equations.
-                System.out.println("ERROR: malformed equations in animation - check these:");
+                System.out.println("[ERROR] Malformed equations in animation - check these:");
                 System.out.println("        " + this.params.getParametric().getX());
                 System.out.println("        " + this.params.getParametric().getY());
                 System.out.println("        " + this.params.getParametric().getZ());
@@ -152,7 +152,7 @@ public class AnimationDecoratorImplementation extends HandlerBase implements IWo
             catch (Exception e)
             {
                 // Just fail and move on.
-                System.out.println("ERROR - check syntax of equations for animation.");
+                System.out.println("[ERROR] Check syntax of equations for animation.");
             }
         }
         BlockPos newpos = new BlockPos(this.origin);
@@ -166,7 +166,7 @@ public class AnimationDecoratorImplementation extends HandlerBase implements IWo
         }
         catch (Exception e)
         {
-            System.out.println("ERROR - can not draw animation.");
+            System.out.println("[ERROR] Can not draw animation.");
         }
     }
 

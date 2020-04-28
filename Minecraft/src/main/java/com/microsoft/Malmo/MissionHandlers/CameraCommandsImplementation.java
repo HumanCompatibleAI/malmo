@@ -64,7 +64,7 @@ public class CameraCommandsImplementation extends CommandBase {
                 this.currentPitch = player.rotationPitch;
             }
         } catch (NumberFormatException e) {
-            System.out.println("ERROR: Malformed parameter string (" + parameter + ") - " + e.getMessage());
+            System.out.println("[ERROR] Malformed parameter string (" + parameter + ") - " + e.getMessage());
             return false;
         }
         return true;

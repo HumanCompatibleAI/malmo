@@ -48,7 +48,7 @@ public class RewardBase extends HandlerBase implements IRewardProducer
             String[] parts = us.split(":");
             if (parts.length != 2)  // Syntax error
             {
-                System.out.println("ERROR: malformed argument for distribution of reward - " + us);
+                System.out.println("[ERROR] malformed argument for distribution of reward - " + us);
                 System.out.println("Entire reward going to " + this.agentName);
                 return reward;
             }

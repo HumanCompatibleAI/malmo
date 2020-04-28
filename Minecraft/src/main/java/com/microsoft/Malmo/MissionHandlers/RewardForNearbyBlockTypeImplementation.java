@@ -158,11 +158,9 @@ public class RewardForNearbyBlockTypeImplementation extends RewardBase implement
                             float scaled_reward = adjusted_reward * invDist;
                             if (bm.singleBlock()) {
                                 if (matcherRewards[i] < scaled_reward) {
-                                    System.out.println("CASE 1");
                                     matcherRewards[i] = scaled_reward;
                                 }
                             } else {
-                                System.out.println("CASE 2");
                                 matcherRewards[i] += scaled_reward;
                             }
                             matcherFires[i] = true;
@@ -183,7 +181,6 @@ public class RewardForNearbyBlockTypeImplementation extends RewardBase implement
                 this.matchers.get(i).tick();
             }
         }
-        System.out.println("A searchable string: " + final_reward);
         reward.add(this.params.getDimension(), final_reward);
     }
 

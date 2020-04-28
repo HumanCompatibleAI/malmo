@@ -103,8 +103,6 @@ public class NearbyCraftCommandsImplementation extends CommandBase {
                 pos = rtr.getBlockPos();
                 if (Minecraft.getMinecraft().world.getBlockState(pos).getBlock() instanceof BlockWorkbench) {
                     closeTable = true;
-                    System.out.println("Crafting!");
-                    System.out.println(message.parameters);
                 }
 
             }

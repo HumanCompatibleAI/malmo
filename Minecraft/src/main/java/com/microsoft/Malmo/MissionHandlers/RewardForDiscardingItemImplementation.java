@@ -59,7 +59,7 @@ public class RewardForDiscardingItemImplementation extends RewardForItemBase imp
         }
         else
         {
-            System.out.println("Error - couldn't understand the itemstack we received.");
+            System.out.println("[ERROR] Couldn't understand the itemstack we received.");
         }
     }
     
