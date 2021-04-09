@@ -26,6 +26,7 @@ import com.microsoft.Malmo.Schemas.PosAndDirection;
 import com.microsoft.Malmo.Schemas.VillageSpawnDecorator;
 import com.microsoft.Malmo.Utils.PositionHelper;
 import com.microsoft.Malmo.Utils.SeedHelper;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -46,14 +47,6 @@ public class VillageSpawnDecoratorImplementation extends HandlerBase implements 
     private PosAndDirection startPosition = null;
     private VillageSpawnDecorator params = null;
 
-    int width;
-    int length;
-    int gaps;
-    int maxPathLength;
-    int xOrg;
-    int yOrg;
-    int zOrg;
-    
 
     @Override
     public boolean parseParameters(Object params)
@@ -66,25 +59,23 @@ public class VillageSpawnDecoratorImplementation extends HandlerBase implements 
 
     private void teleportAgents(MissionInit missionInit, World world)
     {
-
         PosAndDirection pos = new PosAndDirection();
         // Force all players to being at a random starting position
         for (AgentSection as : missionInit.getMission().getAgentSection())
         {
-            Vec3d pos_d = new Vec3d(0.0, 0.0, 0.0);
-            BlockPos blockPos = new BlockPos(pos_d);
+            BlockPos blockPos = world.findNearestStructure("Village", world.getSpawnPoint(), false);
+
             BlockPos new_pos = PositionHelper.getTopSolidOrLiquidBlock(world, blockPos);
             System.out.println("Selected start:" + new_pos.toString());
             pos.setX(new BigDecimal(new_pos.getX() + 0.5));
             pos.setY(new BigDecimal(new_pos.getY()));
             pos.setZ(new BigDecimal(new_pos.getZ() + 0.5));
             System.out.println("Set start!");
-                
+            world.setSpawnPoint(new_pos);
             this.startPosition = pos;
-            as.getAgentStart().setPlacement(pos);            
+            as.getAgentStart().setPlacement(pos);
+            // I have no clue which of these statements is actually working...
         }
-        // Spawn a village at (0, 0)
-
     }
 
     @Override
